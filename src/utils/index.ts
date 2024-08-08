@@ -1,4 +1,4 @@
-import { Land, Rate, data } from "@/data";
+import { Attraction, Land, Rate, data } from "@/data";
 
 export const findAttractionsByRate = (parcName: string, rate: Rate) => {
   const parc = data.parcs.find((parc) => parc.name === parcName);
@@ -10,6 +10,21 @@ export const findAttractionsByRate = (parcName: string, rate: Rate) => {
   const attractions = parc.lands.flatMap((land) => land.attractions || []);
 
   return attractions.filter((attraction) => attraction.rate === rate);
+};
+
+export const findAttractionByName = (attractionName: string) => {
+  let findedAttraction: Attraction | undefined;
+  data.parcs.forEach((parc) => {
+    parc.lands.forEach((land) => {
+      const attraction = land.attractions?.find(
+        (attraction) => attraction.name === attractionName
+      );
+      if (attraction) {
+        findedAttraction = attraction;
+      }
+    });
+  });
+  return findedAttraction;
 };
 
 export const findLandForAttraction = (attractionName: string) => {
@@ -96,3 +111,14 @@ export const getTimeDifference = (timeString: string) => {
     totalMilliseconds: difference,
   };
 };
+
+export const findLandByName = (landName: string) => {
+  let findedLand: Land | undefined;
+  data.parcs.forEach((parc) => {
+    const land = parc.lands.find((land) => land.name === landName);
+    if (land) {
+      findedLand = land;
+    }
+  });
+  return findedLand;
+}

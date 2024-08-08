@@ -1,6 +1,5 @@
 import { Parc } from '@/data';
 import { useQuery } from 'react-query';
-import axios from 'axios';
 
 export interface ApiResponseQueueTimeRide {
   id: number;
@@ -23,9 +22,7 @@ export const useWaitingTime = (parc?: Parc) => {
   return useQuery<ApiResponseQueueTime>({
     queryKey: ['waiting-time', parc?.id],
     queryFn: () =>
-      fetch(
-        `https://queue-times.com/parks/${parc?.id}/queue_times.json`
-      ).then((res) => res.json()),
+      fetch(`/api/queue-times/${parc?.id}`).then((res) => res.json()),
     enabled: !!parc?.id,
   });
 };

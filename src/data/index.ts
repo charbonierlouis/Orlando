@@ -24,6 +24,7 @@ export interface Attraction {
 export interface Land {
   name: string;
   attractions?: Attraction[];
+  neerTo: string[];
 }
 
 export interface Parc {
@@ -44,6 +45,7 @@ export const data: Data = {
       lands: [
         {
           name: "Adventureland",
+          neerTo: ["Frontierland", "Liberty Square"],
           attractions: [
             {
               id: 134,
@@ -63,6 +65,7 @@ export const data: Data = {
         },
         {
           name: "Frontierland",
+          neerTo: ["Adventureland", "Liberty Square"],
           attractions: [
             {
               id: 130,
@@ -82,6 +85,7 @@ export const data: Data = {
         },
         {
           name: "Liberty Square",
+          neerTo: ["Adventureland", "Frontierland"],
           attractions: [
             {
               id: 140,
@@ -94,6 +98,7 @@ export const data: Data = {
         },
         {
           name: "Fantasyland",
+          neerTo: ["Tomorrowland"],
           attractions: [
             {
               id: 136,
@@ -141,6 +146,7 @@ export const data: Data = {
         },
         {
           name: "Tomorrowland",
+          neerTo: ["Fantasyland"],
           attractions: [
             {
               id: 138,
@@ -185,6 +191,7 @@ export const data: Data = {
       lands: [
         {
           name: "World Celebration",
+          neerTo: ["World Discovery", "World Nature"],
           attractions: [
             {
               id: 9,
@@ -204,6 +211,7 @@ export const data: Data = {
         },
         {
           name: "World Discovery",
+          neerTo: ["World Celebration", "World Showcase"],
           attractions: [
             {
               id: 158,
@@ -229,6 +237,7 @@ export const data: Data = {
         },
         {
           name: "World Nature",
+          neerTo: ["World Celebration"],
           attractions: [
             {
               id: 153,
@@ -261,6 +270,7 @@ export const data: Data = {
         },
         {
           name: "World Showcase",
+          neerTo: ["World Discovery"],
           attractions: [
             {
               id: 2679,
@@ -292,6 +302,7 @@ export const data: Data = {
       lands: [
         {
           name: "Hollywood Boulevard",
+          neerTo: ["Sunset Boulevard", "Echo Lake"],
           attractions: [
             {
               id: 6361,
@@ -304,6 +315,7 @@ export const data: Data = {
         },
         {
           name: "Echo Lake",
+          neerTo: ["Hollywood Boulevard", "Grand Avenue", "Commissary Lane"],
           attractions: [
             {
               id: 120,
@@ -316,6 +328,7 @@ export const data: Data = {
         },
         {
           name: "Sunset Boulevard",
+          neerTo: ["Hollywood Boulevard"],
           attractions: [
             {
               id: 123,
@@ -335,6 +348,7 @@ export const data: Data = {
         },
         {
           name: "Star Wars: Galaxy's Edge",
+          neerTo: ["Toy Story Land", "Grand Avenue"],
           attractions: [
             {
               id: 6368,
@@ -354,6 +368,7 @@ export const data: Data = {
         },
         {
           name: "Toy Story Land",
+          neerTo: ["Star Wars: Galaxy's Edge"],
           attractions: [
             {
               id: 5476,
@@ -386,6 +401,7 @@ export const data: Data = {
       lands: [
         {
           name: "Pandora - The World of Avatar",
+          neerTo: [],
           attractions: [
             {
               id: 4439,
@@ -405,6 +421,7 @@ export const data: Data = {
         },
         {
           name: "Africa",
+          neerTo: ["Asia"],
           attractions: [
             {
               id: 113,
@@ -417,6 +434,7 @@ export const data: Data = {
         },
         {
           name: "Asia",
+          neerTo: ["Africa", "DinoLand U.S.A."],
           attractions: [
             {
               id: 110,
@@ -436,6 +454,7 @@ export const data: Data = {
         },
         {
           name: "DinoLand U.S.A.",
+          neerTo: ["Asia"],
           attractions: [
             {
               id: 111,

@@ -3,29 +3,14 @@ import { usePlaning } from '@/hooks/usePlaning';
 import { findLandForAttraction } from '@/utils';
 import { useMemo } from 'react';
 import { Ping } from './ping';
+import { WaitingTime } from './waiting-time';
+import { useRecomendation } from '@/hooks/useRecomendation';
 
 export const Recommendations = () => {
   const { nextAttraction } = usePlaning(1);
+  const { recomendations } = useRecomendation(nextAttraction);
 
-  const land = useMemo(
-    () => findLandForAttraction(nextAttraction?.attractionName ?? ''),
-    [nextAttraction?.attractionName]
-  );
-
-  const sortedAttractions = useMemo(
-    () =>
-      land?.attractions
-        ?.filter((attraction) => {
-          return (
-            attraction.rate === Rate.SI_POSSIBLE ||
-            attraction.rate === Rate.PAS_BESOIN
-          );
-        })
-        .slice(0, 3),
-    [land]
-  );
-
-  if (!sortedAttractions) {
+  if (!recomendations) {
     return null;
   }
 
@@ -33,11 +18,12 @@ export const Recommendations = () => {
     <div className='flex flex-col gap-3 bg-white/30 p-4 rounded-lg'>
       <div className='text-lg font-bold'>Recommendations:</div>
 
-      {sortedAttractions?.map((attraction) => {
+      {recomendations?.map((recomendation) => {
         return (
-          <div key={attraction.id} className='flex gap-3'>
-            <Ping attraction={attraction} />
-            {attraction.name}
+          <div key={recomendation.attraction.id} className='flex gap-3'>
+            <Ping attraction={recomendation.attraction} />
+            {recomendation.attraction.name}
+            <WaitingTime attraction={recomendation.attraction} />
           </div>
         );
       })}

@@ -1,11 +1,13 @@
 'use client';
+import { WaitingTime } from '@/components/waiting-time';
 import { usePlaning } from '@/hooks/usePlaning';
 import {
+  findAttractionByName,
   findLandForAttraction,
   getTimeDifference,
   getTimeDifferenceBetweenTimes,
 } from '@/utils';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
 export default function PlaningPage() {
   const { planing } = usePlaning(1);
@@ -113,6 +115,9 @@ export default function PlaningPage() {
         if (!reservation.time) {
           return;
         }
+
+        const attraction = findAttractionByName(reservation.attractionName);
+
         return (
           <div key={idx} className='flex flex-col gap-4'>
             <div className='bg-white/30 p-4 rounded-xl flex flex-col gap-4'>
@@ -134,6 +139,12 @@ export default function PlaningPage() {
                 <div className='border border-2 px-1 rounded-md w-fit font-bold'>
                   {findLandForAttraction(reservation.attractionName)?.name}
                 </div>
+
+                {!!attraction && (
+                  <WaitingTime
+                    attraction={attraction}
+                  />
+                )}
               </div>
             </div>
 

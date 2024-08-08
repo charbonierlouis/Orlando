@@ -26,7 +26,7 @@ export default function RootLayout({
         ].join(' ')}
       >
         <Link href={'/'}>
-          <header className='flex justify-center items-center w-full py-4 shadow-md bg-white text-blue-800 sticky font-bold top-0'>
+          <header className='flex justify-center items-center w-full py-4 shadow-md bg-white text-blue-800 sticky font-bold top-0 z-[100]'>
             Disney World
           </header>
         </Link>

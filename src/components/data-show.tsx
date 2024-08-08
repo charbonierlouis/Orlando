@@ -1,9 +1,20 @@
-import { Rate, data } from '@/data';
+import { Attraction, Rate, data } from '@/data';
 import { findAttractionsByRate } from '@/utils';
 import { Ping } from './ping';
 import { WaitingTime } from './waiting-time';
 
 export const DataShow = () => {
+  const renderCard = (attraction: Attraction) => (
+    <div className='flex flex-col gap-3'>
+      <div key={attraction.id} className='flex gap-4'>
+        <Ping attraction={attraction} />
+        <div>{attraction.name}</div>
+      </div>
+      <div className='w-full flex justify-center'>
+        <WaitingTime attraction={attraction} />
+      </div>
+    </div>
+  );
   return (
     <div className='flex flex-col gap-8'>
       {data.parcs.map((parc) => (
@@ -16,13 +27,7 @@ export const DataShow = () => {
             <div className='flex flex-col gap-4'>
               <div className='flex flex-col gap-3'>
                 {findAttractionsByRate(parc.name, Rate.A_FAIRE_ABSOLUMENT).map(
-                  (attraction) => (
-                    <div key={attraction.id} className='flex gap-4'>
-                      <Ping attraction={attraction} />
-                      <WaitingTime attraction={attraction} />
-                      <div>{attraction.name}</div>
-                    </div>
-                  )
+                  (attraction) => renderCard(attraction)
                 )}
               </div>
             </div>
@@ -31,12 +36,7 @@ export const DataShow = () => {
             <div className='flex flex-col gap-4'>
               <div className='flex flex-col gap-3'>
                 {findAttractionsByRate(parc.name, Rate.A_FAIRE).map(
-                  (attraction) => (
-                    <div key={attraction.id} className='flex gap-4'>
-                      <Ping attraction={attraction} />
-                      <div>{attraction.name}</div>
-                    </div>
-                  )
+                  (attraction) => renderCard(attraction)
                 )}
               </div>
             </div>
@@ -45,12 +45,7 @@ export const DataShow = () => {
             <div className='flex flex-col gap-4'>
               <div className='flex flex-col gap-3'>
                 {findAttractionsByRate(parc.name, Rate.SI_POSSIBLE).map(
-                  (attraction) => (
-                    <div key={attraction.id} className='flex gap-4'>
-                      <Ping attraction={attraction} />
-                      <div>{attraction.name}</div>
-                    </div>
-                  )
+                  (attraction) => renderCard(attraction)
                 )}
               </div>
             </div>
@@ -59,12 +54,7 @@ export const DataShow = () => {
             <div className='flex flex-col gap-4'>
               <div className='flex flex-col gap-3'>
                 {findAttractionsByRate(parc.name, Rate.PAS_BESOIN).map(
-                  (attraction) => (
-                    <div key={attraction.id} className='flex gap-4'>
-                      <Ping attraction={attraction} />
-                      <div>{attraction.name}</div>
-                    </div>
-                  )
+                  (attraction) => renderCard(attraction)
                 )}
               </div>
             </div>
@@ -73,12 +63,7 @@ export const DataShow = () => {
             <div className='flex flex-col gap-4'>
               <div className='flex flex-col gap-3'>
                 {findAttractionsByRate(parc.name, Rate.A_EVITER).map(
-                  (attraction) => (
-                    <div key={attraction.id} className='flex gap-4'>
-                      <Ping attraction={attraction} />
-                      <div>{attraction.name}</div>
-                    </div>
-                  )
+                  (attraction) => renderCard(attraction)
                 )}
               </div>
             </div>
