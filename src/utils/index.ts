@@ -28,6 +28,17 @@ export const findLandForAttraction = (attractionName: string) => {
   return findedLand;
 };
 
+export const findParcForAttraction = (attractionName: string) => {
+  return data.parcs.find((parc) => {
+    const land = parc.lands.find((land) => {
+      return !!land.attractions?.find((attraction) => {
+        return attraction.name === attractionName;
+      });
+    });
+    return !!land;
+  });
+};
+
 export const getTimeDifferenceBetweenTimes = (
   timeStringA: string,
   timeStringB: string

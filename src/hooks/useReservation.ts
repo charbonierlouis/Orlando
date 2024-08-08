@@ -27,7 +27,7 @@ export const useReservation = (dayNumber: DayNumber) => {
 
   const haveReservation = useMemo(() => {
     return !!reservationData[dayNumber];
-  }, [reservationData]);
+  }, [reservationData, dayNumber]);
 
   const parcName = useMemo(() => {
     return reservationData[dayNumber]?.parcName;
@@ -35,35 +35,35 @@ export const useReservation = (dayNumber: DayNumber) => {
 
   const parc = useMemo(() => {
     return data.parcs.find((parc) => parc.name === parcName);
-  }, [parcName, data.parcs]);
+  }, [parcName]);
 
   const attractions = useMemo(() => {
     return parc?.lands.flatMap((land) => land.attractions);
-  }, [parc]);
+  }, [parc?.lands]);
 
   const attractionsMultiPass1 = useMemo(() => {
     return attractions
       ?.filter((attraction) => attraction?.lane?.includes(Lane.Multi_PASS_1))
       .filter((attraction) => !!attraction) as Attraction[] | undefined;
-  }, [parc, attractions]);
+  }, [attractions]);
 
   const attractionsMultiPass2 = useMemo(() => {
     return attractions
       ?.filter((attraction) => attraction?.lane?.includes(Lane.Multi_PASS_2))
       .filter((attraction) => !!attraction) as Attraction[] | undefined;
-  }, [parc, attractions]);
+  }, [attractions]);
 
   const attractionVirtualLane = useMemo(() => {
     return attractions
       ?.filter((attraction) => attraction?.lane?.includes(Lane.Virtual_Lane))
       .filter((attraction) => !!attraction) as Attraction[] | undefined;
-  }, [parc, attractions]);
+  }, [attractions]);
 
   const attractionSinglePass = useMemo(() => {
     return attractions
       ?.filter((attraction) => attraction?.lane?.includes(Lane.Single_PASS))
       .filter((attraction) => !!attraction) as Attraction[] | undefined;
-  }, [parc, attractions]);
+  }, [attractions]);
 
   const singlePass = useMemo(() => {
     return reservationData[dayNumber]?.singlePass;

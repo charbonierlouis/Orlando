@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import { Rate } from "@/data";
-import { usePlaning } from "@/hooks/usePlaning";
-import { findLandForAttraction, getTimeDifferenceBetweenTimes } from "@/utils";
-import { useEffect, useMemo, useState } from "react";
-import { Recommendations } from "./recomendations";
+import { Rate } from '@/data';
+import { usePlaning } from '@/hooks/usePlaning';
+import { findLandForAttraction, getTimeDifferenceBetweenTimes } from '@/utils';
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import { Recommendations } from './recomendations';
 
 interface Props {
   dayNumber: number;
@@ -32,35 +32,35 @@ export const Timer = ({ dayNumber }: Props) => {
 
   const colorClass = useMemo(() => {
     if (!timer) {
-      return "bg-white/30";
+      return 'bg-white/30';
     }
     if (timer.hours <= 0 && timer.minutes < 10) {
-      return "text-red-500 bg-red-100";
+      return 'text-red-500 bg-red-100';
     }
     if (timer.hours <= 0 && timer.minutes < 30) {
-      return "text-orange-500 bg-orange-100";
+      return 'text-orange-500 bg-orange-100';
     }
 
     if (timer.hours <= 0) {
-      return "text-yellow-500 bg-yellow-100";
+      return 'text-yellow-500 bg-yellow-100';
     }
 
-    return "text-green-500 bg-green-100";
+    return 'text-green-500 bg-green-100';
   }, [timer]);
 
-  const setTimerTime = () => {
+  const setTimerTime = useCallback(() => {
     if (!nextAttractionTime) {
       return;
     }
 
     const now = new Date();
-    const nowString = now.getHours() + ":" + now.getMinutes();
+    const nowString = now.getHours() + ':' + now.getMinutes();
     const diff = getTimeDifferenceBetweenTimes(nextAttractionTime, nowString);
     setTimer({
       hours: diff.hours,
       minutes: diff.minutes,
     });
-  };
+  }, [nextAttractionTime]);
 
   useEffect(() => {
     if (!nextAttractionTime) {
@@ -76,7 +76,7 @@ export const Timer = ({ dayNumber }: Props) => {
     return () => {
       clearInterval(interval);
     };
-  }, [nextAttractionTime]);
+  }, [nextAttractionTime, setTimerTime]);
 
   const renderTimer = () => {
     if (!timer) {
@@ -85,12 +85,12 @@ export const Timer = ({ dayNumber }: Props) => {
 
     if (timer.hours > 0) {
       return (
-        <div className="text-4xl font-bold uppercase">{`${timer.hours}h ${timer.minutes}m`}</div>
+        <div className='text-4xl font-bold uppercase'>{`${timer.hours}h ${timer.minutes}m`}</div>
       );
     }
 
     return (
-      <div className="text-4xl font-bold uppercase">{`${timer.minutes}m`}</div>
+      <div className='text-4xl font-bold uppercase'>{`${timer.minutes}m`}</div>
     );
   };
 
@@ -99,7 +99,7 @@ export const Timer = ({ dayNumber }: Props) => {
       return;
     }
     return (
-      <div className="font-semibold text-xl">
+      <div className='font-semibold text-xl'>
         {nextAttraction.attractionName}
       </div>
     );
@@ -111,7 +111,7 @@ export const Timer = ({ dayNumber }: Props) => {
     }
 
     return (
-      <div className="font-semibold text-lg">{nextAttractionLand.name}</div>
+      <div className='font-semibold text-lg'>{nextAttractionLand.name}</div>
     );
   };
 
@@ -120,7 +120,7 @@ export const Timer = ({ dayNumber }: Props) => {
   }
 
   return (
-    <div className="flex flex-col gap-6">
+    <div className='flex flex-col gap-6'>
       <div
         className={`w-full flex flex-col justify-center items-center gap-6 text-center py-8 rounded-xl ${colorClass}`}
       >

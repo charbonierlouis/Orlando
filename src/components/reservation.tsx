@@ -1,6 +1,6 @@
-import { Lane, data } from "@/data";
-import { useReservation } from "@/hooks/useReservation";
-import { ReservationSelect } from "./reservation-select";
+import { Lane, data } from '@/data';
+import { useReservation } from '@/hooks/useReservation';
+import { ReservationSelect } from './reservation-select';
 
 interface Props {
   dayNumber: number;
@@ -23,7 +23,7 @@ export const Reservation = ({ dayNumber }: Props) => {
     multiPass2Choice1,
     setMultiPass2Choice1,
     multiPass2Choice2,
-    setMultiPass2Choice2
+    setMultiPass2Choice2,
   } = useReservation(dayNumber);
 
   const handleParcChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -31,9 +31,9 @@ export const Reservation = ({ dayNumber }: Props) => {
   };
 
   return (
-    <div className="w-full flex flex-col gap-8 items-center">
+    <div className='w-full flex flex-col gap-8 items-center'>
       <select
-        className="select select-bordered w-full max-w-xs text-black font-bold"
+        className='select select-bordered w-full max-w-xs text-black font-bold'
         value={parcName}
         onChange={handleParcChange}
       >
@@ -41,7 +41,7 @@ export const Reservation = ({ dayNumber }: Props) => {
           Parc
         </option>
         {data.parcs.map((parc) => (
-          <option>{parc.name}</option>
+          <option key={parc.id}>{parc.name}</option>
         ))}
       </select>
 
@@ -76,7 +76,7 @@ export const Reservation = ({ dayNumber }: Props) => {
         time={multiPass2Choice1?.time}
         onChange={setMultiPass2Choice1}
       />
-       <ReservationSelect
+      <ReservationSelect
         attractions={attractionsMultiPass2}
         lane={Lane.Multi_PASS_2}
         value={multiPass2Choice2?.attractionName}

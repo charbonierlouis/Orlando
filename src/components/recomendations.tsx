@@ -1,14 +1,14 @@
-import { Rate } from "@/data";
-import { usePlaning } from "@/hooks/usePlaning";
-import { findLandForAttraction } from "@/utils";
-import { useMemo } from "react";
-import { Ping } from "./ping";
+import { Rate } from '@/data';
+import { usePlaning } from '@/hooks/usePlaning';
+import { findLandForAttraction } from '@/utils';
+import { useMemo } from 'react';
+import { Ping } from './ping';
 
 export const Recommendations = () => {
   const { nextAttraction } = usePlaning(1);
 
   const land = useMemo(
-    () => findLandForAttraction(nextAttraction?.attractionName ?? ""),
+    () => findLandForAttraction(nextAttraction?.attractionName ?? ''),
     [nextAttraction?.attractionName]
   );
 
@@ -30,12 +30,12 @@ export const Recommendations = () => {
   }
 
   return (
-    <div className="flex flex-col gap-3 bg-white/30 p-4 rounded-lg">
-      <div className="text-lg font-bold">Recommendations:</div>
+    <div className='flex flex-col gap-3 bg-white/30 p-4 rounded-lg'>
+      <div className='text-lg font-bold'>Recommendations:</div>
 
       {sortedAttractions?.map((attraction) => {
         return (
-          <div className="flex gap-3">
+          <div key={attraction.id} className='flex gap-3'>
             <Ping attraction={attraction} />
             {attraction.name}
           </div>

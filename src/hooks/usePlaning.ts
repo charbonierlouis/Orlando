@@ -7,7 +7,7 @@ export const usePlaning = (dayNumber: number) => {
 
   const dayReservationData = useMemo(() => {
     return reservationData[dayNumber];
-  }, [reservationData]);
+  }, [reservationData,dayNumber]);
 
   const planing = useMemo(() => {
     const res: Reservation[] = [];
