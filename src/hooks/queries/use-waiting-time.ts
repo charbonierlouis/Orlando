@@ -24,5 +24,6 @@ export const useWaitingTime = (parc?: Parc) => {
     queryFn: () =>
       fetch(`/api/queue-times/${parc?.id}`).then((res) => res.json()),
     enabled: !!parc?.id,
+    refetchInterval: 1000 * 60,
   });
 };
