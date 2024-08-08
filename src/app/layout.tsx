@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import Link from "next/link";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,8 +16,22 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <html lang="fr">
+      <body
+        className={[
+          inter.className,
+          "bg-gradient-to-t from-blue-800 to-sky-400 w-full min-h-screen overflow-scroll",
+        ].join(" ")}
+      >
+        <Link href={"/"}>
+          <header className="flex justify-center items-center w-full py-4 shadow-md bg-white text-blue-800 sticky font-bold top-0">
+            Disney World
+          </header>
+        </Link>
+        <main className="text-white p-4">
+        {children}
+        </main>
+      </body>
     </html>
   );
 }
