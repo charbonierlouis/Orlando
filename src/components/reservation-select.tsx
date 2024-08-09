@@ -1,13 +1,14 @@
-import { Attraction, Lane } from '@/data';
-import { useMemo } from 'react';
-import { ReservationPickDate } from './reservation-pick-date';
+import { Attraction, Lane } from "@/data";
+import { useMemo } from "react";
+import { ReservationPickDate } from "./reservation-pick-date";
+import { FaXmark } from "react-icons/fa6";
 
 interface Props {
   attractions?: Attraction[];
   lane: Lane;
-  value?: Attraction['name'];
+  value?: Attraction["name"];
   time?: string;
-  onChange?: (attraction: Attraction['name'], time?: string) => void;
+  onChange?: (attraction: Attraction["name"], time?: string) => void;
 }
 
 export const ReservationSelect = ({
@@ -20,20 +21,22 @@ export const ReservationSelect = ({
   const title = useMemo(() => {
     switch (lane) {
       case Lane.Multi_PASS_1:
-        return 'Multipass Catégorie 1';
+        return "Multipass Catégorie 1";
       case Lane.Multi_PASS_2:
-        return 'Multipass Catégorie 2';
+        return "Multipass Catégorie 2";
       case Lane.Single_PASS:
-        return 'Singlepass';
+        return "Singlepass";
       case Lane.Virtual_Lane:
-        return 'Virtual Lane';
+        return "Virtual Lane";
       default:
-        return 'Classique';
+        return "Classique";
     }
   }, [lane]);
 
-  const handleChange = (e: string, time?: string) => {
-    onChange?.(e, time);
+  const handleChange = (e?: string, time?: string) => {
+    if (e) {
+      onChange?.(e, time);
+    }
   };
 
   if (!attractions?.length) {
@@ -41,10 +44,13 @@ export const ReservationSelect = ({
   }
 
   return (
-    <div className='flex flex-col gap-3 w-full items-center bg-base-100/30 py-4 rounded-xl'>
+    <div className="flex flex-col gap-3 w-full items-center bg-base-100/30 py-4 rounded-xl relative">
+      <button onClick={() => handleChange(value)} className="absolute top-2 right-2">
+        <FaXmark className="text-red-500 text-2xl" />
+      </button>
       <h3>{title}</h3>
       <select
-        className='select select-bordered w-full max-w-xs text-black font-bold'
+        className="select select-bordered w-full max-w-xs text-black font-bold"
         onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
           handleChange(e.target.value);
         }}
